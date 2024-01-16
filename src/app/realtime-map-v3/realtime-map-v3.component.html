@@ -1,0 +1,48 @@
+<agm-map
+    [latitude]="myLocation.lat"
+    [longitude]="myLocation.lng"
+    [zoom]="zoomLevel"
+    [styles]="map_styles"
+    [zoomControl]="zoomControl"
+    [streetViewControl]="streetViewControl"
+    [mapTypeControl]="mapTypeControl">
+
+    <!--Marker for the myLocation-->
+    <agm-marker *ngIf="myLocation"
+      [latitude]="myLocation.lat"
+      [longitude]="myLocation.lng"
+      iconUrl="assets/photo.jpg"
+    >
+    </agm-marker>
+    <!--Marker for the driver-->
+    <agm-marker *ngIf="driverLocation"
+      [latitude]="driverLocation.lat"
+      [longitude]="driverLocation.lng"
+      iconUrl="assets/car.png"
+    >
+    <!-- Polyline for the route of driver -->
+    <agm-polyline [strokeColor]="'black'" *ngIf="lineStartPoint && lineEndPoint">
+        <agm-polyline-point
+          [latitude]="lineStartPoint.lat"
+          [longitude]="lineStartPoint.lng"
+        >
+        </agm-polyline-point>
+        <agm-polyline-point
+          [latitude]="lineEndPoint.lat"
+          [longitude]="lineEndPoint.lng"
+        >
+        </agm-polyline-point>
+      </agm-polyline>
+    </agm-marker>
+</agm-map>
+<div class="alert">
+    <a class="button"><i class="material-icons">verified_user</i></a>
+    <p> <strong>Evita la propagación</strong> <br/> Viaja sólo lo necesario</p>
+</div>
+<div class="search">
+    <input type="text" placeholder="Where to?" />
+</div>
+<ul class="destinations">
+    <li><a class="button" (click)="requestTo('home')"><i class="material-icons">home</i><p><strong>Home</strong><br/> La Pradera Sopetran</p></a></li>
+    <li><a class="button"><i class="material-icons">work</i><p><strong>Work</strong><br/> Globant Medellín</p></a></li>
+</ul>
